@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Washoe County Commission 2026 — Candidate Q&amp;A</title>
+<style>
+  :root {
+    --paper: #F7F5F0;
+    --ink: #22252A;
+    --ink-soft: #55585E;
+    --rule: #DAD6CC;
+    --rule-strong: #B9B4A6;
+    --dem: #2E5266;
+    --dem-bg: #E7EEF1;
+    --rep: #7A3B32;
+    --rep-bg: #F1E7E4;
+    --accent: #A8532E;
+    --focus: #1F6FEB;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem 5rem;
+  }
+
+  header.masthead {
+    border-bottom: 3px solid var(--ink);
+    padding-bottom: 1.1rem;
+    margin-bottom: 1.75rem;
+  }
+
+  header.masthead .kicker {
+    font-size: 0.8rem;
+    letter-spacing: 0.02em;
+    color: var(--ink-soft);
+    margin: 0 0 0.35rem;
+  }
+
+  header.masthead h1 {
+    font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+    font-weight: 600;
+    font-size: 1.85rem;
+    line-height: 1.15;
+    margin: 0 0 0.6rem;
+  }
+
+  header.masthead p.dek {
+    font-size: 0.98rem;
+    color: var(--ink-soft);
+    margin: 0;
+    max-width: 62ch;
+  }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    margin: 1.25rem 0 0;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+
+  .legend .swatch {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .legend .dot {
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .dot.dem { background: var(--dem); }
+  .dot.rep { background: var(--rep); }
+
+  .search-row {
+    margin: 1.75rem 0 1.5rem;
+  }
+
+  .search-row input {
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.7rem 0.9rem;
+    border: 1.5px solid var(--rule-strong);
+    background: #fff;
+    color: var(--ink);
+    border-radius: 3px;
+    font-family: inherit;
+  }
+
+  .search-row input:focus {
+    outline: 2px solid var(--focus);
+    outline-offset: 1px;
+  }
+
+  .search-row .count {
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    margin-top: 0.45rem;
+  }
+
+  .question-list {
+    border-top: 1px solid var(--rule-strong);
+  }
+
+  .q-item {
+    border-bottom: 1px solid var(--rule-strong);
+  }
+
+  .q-toggle {
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    padding: 1.05rem 0.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    font-family: inherit;
+    color: var(--ink);
+  }
+
+  .q-toggle:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  .q-toggle .caret {
+    flex: none;
+    width: 1.1rem;
+    height: 1.1rem;
+    margin-top: 0.2rem;
+    color: var(--accent);
+    transition: transform 0.18s ease;
+  }
+
+  .q-item.open .q-toggle .caret {
+    transform: rotate(90deg);
+  }
+
+  .q-toggle .q-text {
+    font-size: 1.02rem;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .q-panel {
+    display: none;
+    padding: 0 0.1rem 1.5rem 1.95rem;
+  }
+
+  .q-item.open .q-panel {
+    display: block;
+  }
+
+  .answer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  @media (min-width: 620px) {
+    .answer-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (min-width: 900px) {
+    .answer-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  .answer-card {
+    border: 1px solid var(--rule);
+    border-left-width: 4px;
+    background: #fff;
+    padding: 0.9rem 1rem 1rem;
+    border-radius: 2px;
+  }
+
+  .answer-card.dem { border-left-color: var(--dem); }
+  .answer-card.rep { border-left-color: var(--rep); }
+
+  .answer-card .who {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .answer-card .who .name {
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .answer-card .who .tag {
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0.1rem 0.4rem;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+
+  .tag.dem { background: var(--dem-bg); color: var(--dem); }
+  .tag.rep { background: var(--rep-bg); color: var(--rep); }
+
+  .answer-card .district {
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    margin: -0.35rem 0 0.6rem;
+  }
+
+  .answer-card .answer-text {
+    font-size: 0.92rem;
+    color: var(--ink);
+    white-space: pre-wrap;
+  }
+
+  .no-results {
+    padding: 2rem 0.1rem;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    display: none;
+  }
+
+  footer.note {
+    margin-top: 2.5rem;
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    border-top: 1px solid var(--rule);
+    padding-top: 1rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .q-toggle .caret { transition: none; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="masthead">
+      <p class="kicker">The Nevada Independent — 2026 Washoe County Commission</p>
+      <h1>Where they stand, issue by issue</h1>
+      <p class="dek">
+        Four candidates completed our questionnaire on issues facing unincorporated
+        Washoe County. Click any question below to read each candidate's full answer.
+      </p>
+      <div class="legend">
+        <span class="swatch"><span class="dot dem"></span> Democrat</span>
+        <span class="swatch"><span class="dot rep"></span> Republican</span>
+      </div>
+    </header>
+
+    <div class="search-row">
+      <input type="text" id="search" placeholder="Search questions or answers (e.g. &quot;data center,&quot; &quot;jail,&quot; &quot;housing&quot;)" aria-label="Search questions or answers">
+      <div class="count" id="result-count"></div>
+    </div>
+
+    <div class="question-list" id="question-list"></div>
+    <p class="no-results" id="no-results">No questions match your search.</p>
+
+    <footer class="note">
+      Jon Killoran (R, District 2) and Troy Regas (R, District 3) did not
+      complete this questionnaire and are not included above.
+    </footer>
+  </div>
+
+<script>
+const DATA = {"candidates": [{"key": "Rob Pierce", "name": "Rob Pierce", "party": "R", "district": "District 5"}, {"key": "Brian Wadsworth", "name": "Brian Wadsworth", "party": "D", "district": "District 5"}, {"key": "Mariluz Garcia", "name": "Mariluz Garcia", "party": "D", "district": "District 3"}, {"key": "Marie Rodriguez", "name": "Marie Rodriguez", "party": "D", "district": "District 2"}], "questions": [{"id": 1, "question": "Reno's data center moratorium runs through August 2027, but that only covers city limits. Does unincorporated Washoe County need its own regulatory framework — or even its own moratorium — for data centers? What would you require on water use, power demand, or community benefit agreements?", "answers": {"Rob Pierce": "I believe unincorporated Washoe County needs a clear regulatory framework for data centers. I am not against economic development, but we should not approve projects first and figure out their impacts later. I would support a temporary moratorium if necessary to give the County time to develop responsible regulations. Water is one of my biggest concerns. In our high-desert community, we need to know where the water will come from, how much will be used, and how it will affect existing residents and future growth. We also need to understand the tremendous power demands and make sure existing ratepayers are not left paying for the necessary infrastructure. I am also very concerned about placing these industrial facilities next to residential neighborhoods. Noise from cooling equipment, heat generated by these facilities, lighting, and their 24-hour operation can affect surrounding residents. Before approving them, we need clear standards determining where data centers should and should not be located, appropriate setbacks, and requirements for noise and heat mitigation. We need some major regional coordination efforts. If they are allowed here, the benefits must outweigh the impacts on our residents.", "Brian Wadsworth": "Yes, I believe that Washoe County should have its own regulatory framework for data centers, which would include a moratorium. Even though the City Councils and Washoe County Commissioners are in charge of their respective jurisdictions, there are places where the jurisdictions could be either Washoe County or one of the cities-depending on which side of the street you stand on. All the decisions made by the City Councils and Washoe County Commissioners affect us all here in Washoe County. I would like to see a more coordinated efforts between the cities and Washoe County on issues like data centers and development issues. We live in one of the driest states in the United States and we are always in a state of drought. Any data center that uses excessive amounts of water should be banned. Any power needed should be provided by the data center's owner, not the public, and by renewable energy sources. I understand there are beneficial uses for data centers (e.g. construction jobs), but I am also cognizant of the environmental concerns when it comes to data centers and the potential environmental harm they can cause a community.", "Mariluz Garcia": "I believe we need a temporary pause until we can determine a regional regulatory framework and give the legislature time to address the abatements during the 2027 session. Washoe County has not received a new land-use application for a data center since I have been on the Commission, but that doesn't mean that one isn't heading our way. We are actively engaged in regional discussions through TMRPA, but those recently drafted local and state recommendations do not provide specific city or county policies or parameters to incorporate into the public process. If an application were to come next month, the Planning Commission and the County Commission would not have the necessary information or guardrails it needs. The impacts of data centers cross jurisdictional lines, so I believe we need a well-defined and predictable regulatory framework. Ultimately, we need to ensure that the water and electricity consumption does not fall on the backs of our residential and small-business ratepayers. I want to see transparency, reporting, and ongoing monitoring of resources and other environmental impacts. Our community deserves to know what resources these data centers consume, what public benefits they provide, and who ultimately bears the cost.", "Marie Rodriguez": "Regarding Data Centers, unincorporated Washoe County needs its own regulatory framework to prevent data centers from bypassing city rules and over-allocating regional resources. Without county-level parameters, developers could target unincorporated areas adjacent to Reno and Sparks, shifting environmental and infrastructure burdens onto county residents. I am open to a moratorium. Water and power are precious resources. I would require the implementation of water use requirements and power demand requirements that would ensure minimal impact. Review of impact on community would include measurable local hiring, look at impact noise and / or quality buffering, resource consumption."}}, {"id": 2, "question": "What's your view on density bonuses and \"attainable housing\" code changes moving through the planning commission?", "answers": {"Rob Pierce": "I support finding responsible ways to create more attainable housing in Washoe County. Our teachers, firefighters, law enforcement officers, veterans, seniors, and working families should have a realistic opportunity to live in the community they serve. Density bonuses can be one tool, but I do not believe increased density should be automatic or applied the same way everywhere. What works in an urban area may not work in Spanish Springs, Cold Springs, the North Valleys, or our rural communities. Before granting additional density, I want to know whether the roads, schools, water, sewer, fire protection, law enforcement, and other infrastructure can support it. I also want meaningful public input from the people who already live in the affected area. Most importantly, if we give a developer additional density in exchange for attainable housing, there needs to be accountability. We should make sure those homes actually remain attainable for a meaningful period of time. I support attainable housing, but we have to balance the need for housing with infrastructure, existing neighborhoods, private property rights, and the quality of life our residents expect.", "Brian Wadsworth": "I am supportive of measures to provide attainable housing for our communities. Density bonuses provide an incentive for developers to build more attainable housing. When I served as the Housing Director for the Pyramid Lake Housing Authority, we were looking at Low-Income Housing Tax Credits to build affordable housing for our community. We were thinking outside the box to build more homes for our community members, and the county should continue to do the same.", "Mariluz Garcia": "Approximately half of Washoe County renters are cost-burdened, spending more than 30% of their household income on housing, and the burden is even greater for seniors and young renters ages 18–24. Since 2023, I am proud to have voted for housing code amendments to Washoe County Code Chapter 110 that expand attainable housing options across income levels. I supported \"missing middle\" housing, senior housing developments, accessory dwelling units (ADUs), infill development, density bonuses for attainable and small-unit housing, and expedited approval of attainable housing projects. Because density alone does not guarantee affordability, I also supported deed-restricted rental units for 30 years and deed-restricted for-sale units for 9 years to preserve access for income-qualified families. Measures like this are important because the prices of homes in Washoe County have increased dramatically over the past decade, while the median household income has not kept pace.", "Marie Rodriguez": "I feel it should be viewed with caution. Growth in certain areas of Washoe County may be imprudent and perilous. The code amendments and density bonuses going through Washoe County are aimed to increase housing supply and affordability by offering targeted incentives to developers. It includes small unit incentives with the goal being affordable and attainable housing. The proponent argument is that the flexible regulations offset construction costs and helps create workforce and senior housing. However, small unit development resulting in increased density will cause added traffic strain, wildfire evacuation issues (we just saw this last month), and overburdening of utility grids. Building housing isn't just putting up four walls and a roof. Housing is neighborhoods, roads, utilities, resources, services, impact on environment, and more."}}, {"id": 3, "question": "How do you view housing demand in Washoe County right now, and what should the county be doing to address it (including in unincorporated areas)?", "answers": {"Rob Pierce": "Housing demand in Washoe County remains a serious issue. We need more housing at different price points, especially housing that our working families, seniors, veterans, teachers, firefighters, law enforcement officers, and young people starting out can actually afford. I believe the County should encourage a full range of housing options, including starter and entry-level homes, workforce and attainable housing, senior housing, smaller homes, accessory dwelling units, traditional single-family homes, as well as higher-end and luxury homes. There should be choices for people at every stage of life and income level. We should also streamline the permitting process without eliminating necessary public review or protections for existing neighborhoods. In unincorporated Washoe County, we cannot look at housing numbers alone. Before adding significant density, we must make sure roads, water, sewer, schools, fire protection, law enforcement, and other infrastructure can support that growth. We also need to work with developers rather than adding unnecessary costs and regulations that ultimately get passed on to homebuyers. My goal is responsible growth that provides housing choices while protecting neighborhoods, private property rights, taxpayers, and our quality of life.", "Brian Wadsworth": "We have a high demand for housing here in Washoe County, and this demand does not appear to be slowing down. We have more businesses and people coming to the area (e.g. Tahoe-Regional Industrial Center). This housing demand is not just limited to Washoe County, but also outlying areas. I live near Fernley, and that community is seeing an increase in population and demand for housing. The county needs to look at responsible growth and development. This means ensuring we have the sustainable resources to support any new growth and developments. This also means evaluating the cumulative effects of any new growth and developments.", "Mariluz Garcia": "The housing demand in Washoe County remains strong, but affordability is the bigger issue especially for working families, seniors, young people, and multigenerational households. I first moved to Washoe County for college in 1998, and over the past three decades, I have watched our community grow while the housing market has largely focused on two housing products: (1) traditional single-family homes and (2) larger multifamily developments. I believe the residents of Washoe County deserve more housing types and price points to choose from, which is why I am a strong advocate for building duplexes, triplexes, fourplexes, cottage courts, townhomes, and single-family homes with accessory dwelling units (ADUs) to support multigenerational living. Reno, Sparks, and Washoe County should continue to identify opportunities to responsibly increase housing choices while ensuring that roads, public transit, water, sewer, schools, and public safety keep up with growth.", "Marie Rodriguez": "Washoe County's housing demand is critically high and inventory constrained. The median single-family home price is at an all-time record high of $635,000; and roughly 50% of renters are classified as cost-burdened (spending over 30% of their income on housing). A severe regional shortage of affordable options persists. As the above question shows, the county is addressing it with density bonuses and code changes. The solution isn't simple and will take time. We aren't the only region facing this housing issue. Our constrained geography with federally owned land and the industrial expansions contribute to the situation."}}, {"id": 4, "question": "Beyond data centers, what industries or employers should the county prioritize attracting, and what's your view on the tax abatements the county has used to lure them?", "answers": {"Rob Pierce": "I believe Washoe County should focus on attracting employers that bring good-paying, long-term jobs and diversify our economy. I would prioritize advanced manufacturing, healthcare and medical services, clean energy, water technology, and businesses that provide skilled jobs and career opportunities for our residents. Healthcare is especially important. As our population grows and ages, we need more doctors, nurses, medical specialists, healthcare facilities, and related employers so our residents can get the care they need without leaving our community. I also want to support our existing local businesses. Economic development should not only be about bringing large companies into Washoe County. We need to help the businesses already here grow and succeed. I am not opposed to tax abatements, but there must be a measurable return for taxpayers through good-paying jobs, investment, infrastructure, and long-term economic benefit. Companies receiving significant incentives should also be held accountable for the jobs, wages, and investments they promise. Washoe County is already an attractive place to do business. Incentives can be a tool, but taxpayers should not carry the costs while a company receives the benefits.", "Brian Wadsworth": "We live in a beautiful area. We have Lake Tahoe and Pyramid Lake and the Sierra Mountains in our backyard. I currently serve as the Treasurer for the American Indigenous Tourism Association Board of Directors, the Vice President for the Nevada Indian Territory (the Tribal tourism group for the State of Nevada), and I am also a former Ex-officio member of the Nevada Commission on Tourism. We could look at ways to attract more outdoors activities to increase people visiting Washoe County. I feel that the tax abatements for large corporations have not been economically beneficial for the general public.", "Mariluz Garcia": "A concept that I think we should explore is bringing an innovation district to Washoe County. Cities throughout the world have been developing walkable, mixed-use neighborhoods where research institutions, companies, housing, and restaurants coexist. With the University of Nevada, Reno, the Desert Research Institute, the Nevada Center for Applied Research, and the Innevation Center, our region already has some of the core ingredients. With the talent that we already have, our region could easily explore building a larger ecosystem around industries like water technology, clean energy, life sciences, or advanced manufacturing and robotics. I think we should try and figure out what it would take to build an innovation district where researchers, entrepreneurs, engineers, students, and investors regularly run into one another and collaborate. When it comes to tax abatements, I believe they should be used sparingly and strategically, tied to measurable benefits for our community, and have a high return on investment.", "Marie Rodriguez": "The industries that the county attracts should bring jobs to local workers at a livable wage. To build a stronger and more resilient economy, any economic development initiative should promote prosperity and sustainability. Washoe County already attracts logistics/supply chain management. Considering we are a quickly warming city, we should consider industries in clean air, sustainability, and urban forestry. Nevada has medical provider shortages and challenges, especially medical specialists and mental health. We need to attract and keep medical workers. I question how or if these tax abatements have helped bring permanent jobs and / or livable wages for local workers. It would also seem that these tax abatements are also a missed tax revenue opportunity for local government. It would appear the only ones benefitting from the tax abatements are the industries that we are giving them to."}}, {"id": 5, "question": "The FY27 budget added no new positions and leaned on reserves and salary savings. Where would you look first for savings or new revenue if that trend continues?", "answers": {"Rob Pierce": "If this trend continues, my first step would be to look at spending before asking taxpayers for more money. I would conduct a department-by-department review to identify duplication, unnecessary contracts, administrative costs, vacant positions, and programs that are not producing measurable results. I would also look for opportunities to consolidate services, use technology more effectively, and work with our regional partners where sharing services can save taxpayers money without reducing public safety or essential services. On the revenue side, I would rather grow our economy than raise taxes. Bringing in good-paying employers, supporting existing businesses, and expanding our commercial tax base can generate additional revenue without placing another burden on homeowners. I also believe growth should pay for growth. New development should pay its fair share of the infrastructure and services it requires rather than passing those costs on to existing taxpayers. Finally, reserves are important for emergencies and economic downturns. They should not become a long-term solution for balancing ongoing expenses. We need to live within our means and build a budget that is sustainable year after year.", "Brian Wadsworth": "I graduated from the University of Nevada, Reno with two Bachelor of Science degrees: one in Business Administration and the other in Accounting. I also graduated from Gonzaga University with a Master of Business Administration. I spent several years working in the State of Nevada Governor's Finance Office as an Executive Branch Auditor. We conducted performance audits on various Executive Branch agencies, where we reviewed the efficiencies and effectiveness of those agencies. If elected, I would advocate to sit in the Internal Audit Committee. One area to look at, to help address the forthcoming budget deficits, would to evaluate the county's spending. I am not advocating for cutting programs, but perhaps we could work with our vendors to use the county's purchasing power to get the best prices.", "Mariluz Garcia": "The Washoe County Checkbook, launched in April 2025, provides transparency into County revenues, expenditures, payroll information, and spending across departments. Approximately, 80% of the County's general fund budget is related to employees' salaries and benefits, which are negotiated by 11 different collective bargaining/labor groups. Our vacancy savings approach (in lieu of a hiring freeze or layoffs) is generating real savings, but it is not a complete solution for our structural deficit. I believe we should continue to explore early intervention and diversion efforts within our child welfare system and courts to reduce downstream costs, including unnecessary time in foster care or jail awaiting appropriate placement or intervention. The County's Climate Action plan also provides a variety of cost saving opportunities as we look at the energy efficiency of our County facilities, fleet, and energy use. We must continue to use technology to reduce transactions that require county staff and consolidate office operations across departments where practical. I am supportive of looking at underutilized County-owned real estate as an opportunity to bring in recurring revenue from long-term leases.", "Marie Rodriguez": "I don't like the \"tighten the belt\" approach to a budget. Belts can only tighten so far before a person can't breathe. This area is growing, now we need to be smart about the growth and look for new revenue. This area has changed; we cannot keep running the county as if it hasn't. I'd start by looking at the tax abatements and go from there."}}, {"id": 6, "question": "With senior services named a strategic focus area, what specific gap in current programming — in-home care, transportation, nutrition — would you prioritize funding first?", "answers": {"Rob Pierce": "Senior services are extremely important to me. If I had to prioritize one area for additional funding, I would start with transportation, particularly for seniors living in our unincorporated and rural communities. A senior can have access to great programs, but those programs do little good if they cannot get to a doctor's appointment, grocery store, pharmacy, senior center, or other essential services. We need to look at expanding affordable and reliable transportation options and working with RTC, nonprofits, healthcare providers, and community organizations to fill those gaps. At the same time, I would not ignore nutrition or in-home services. Meals on Wheels is especially important because it provides food, personal contact, and a wellness check for homebound seniors. We also need programs that help seniors remain safely and independently in their own homes for as long as possible. Our senior population is growing, and many have spent decades contributing to this community. I believe we have a responsibility to plan ahead for their needs. My priority is helping seniors maintain their independence, dignity, mobility, and connection to their community.", "Brian Wadsworth": "All services for our elders should be a priority. I would say that in-home care would be gap in current programming to look at. This would include wellness checks, food home delivery, and care.", "Mariluz Garcia": "Senior services are a priority under Washoe County's current strategic plan and we are always working to help seniors stay independent, healthy, and safely in their homes. During my time serving on the commission, I am proud to have voted for many senior center capital improvements and important services like our homemaker, nutrition, and wellness programs. Improving access to transportation is a main priority for me because I believe it is a force multiplier. Without a ride, a senior may not be able to get to the grocery store, pharmacy, doctor's office, or another important resource. Through my role on the Regional Transportation Commission (RTC), I have supported paratransit services through RTC ACCESS, senior ride programs that provide taxi, Lyft, and Uber subsidies, and curbside-to-curbside transportation through FlexRIDE. I believe senior isolation and mental health continues to be a major gap where as many as 1 out of 4 Washoe County residents over the age of 60 reported being moderately to highly isolated. Transportation is one of the tools that can address senior isolation because it helps seniors to maintain their independence, access essential services, and stay connected to others in the community.", "Marie Rodriguez": "While all three are important. I'd prioritize transportation. Without it, seniors cannot move. Transportation is needed to connect to their community. Seniors need to get to doctor appointments, shopping, recreation, social programs, and other resources."}}, {"id": 7, "question": "Beyond CARES Campus operations, how should the county coordinate with Reno and Sparks on the broader rise in homelessness — and are you satisfied with oversight of the county's own housing and homeless services division, given past mismanagement allegations?", "answers": {"Rob Pierce": "Homelessness is a regional problem and cannot be solved by Washoe County alone. Reno, Sparks, and the County need one coordinated plan with clearly defined responsibilities, shared data, shared expenses, measurable goals, and accountability for results. We need to focus on prevention, mental health and substance abuse services, job assistance, transitional and supportive housing, and ultimately helping people become self-sufficient. We also need to address encampments and their impacts on neighborhoods, businesses, public safety, and our environment. I am a strong believer in giving people a hand up, but I am against creating a system of handouts that can enable dependency. Our programs should provide people with the tools, services, and opportunities they need to get back on their feet while also expecting personal responsibility whenever they are capable. Regarding oversight of the County's Housing and Homeless Services Division, I am not satisfied with what we have learned about past management. Taxpayer dollars require transparency and accountability. As Commissioner, I would expect regular financial reviews, performance audits, clear outcome reporting, and stronger Board oversight. Compassion, accountability, and helping people become self-sufficient must go together.", "Brian Wadsworth": "There are a lot of services and resources offered at the CARES Campus, but I feel there needs to be a full audit on the CARES Campus, with a focus on the effectiveness of the types of services provided. I have heard a lot of concerns from the community about a lack of transparency with the CARES Campus operations, and I feel an audit would help address these concerns. We have a lot of great community partners that are able to provide services for our unhoused population. I am always amazed at how many community partners we have here in Washoe County. As a county, I would like to see more collaboration with all these great community partners and resources. I also would like to see the Community Homelessness Advisory Board stay active, even though a few of the elected officials want to see it dissolved, and have a bit more authority to work with community partners and the community to help adequately address this issue.", "Mariluz Garcia": "I lived in downtown Reno with my two young children during the pandemic, and I personally witnessed the homeless crisis at its worst right outside my front door. Since then, the region has made significant strides towards ensuring that residents have access to safe, stable, and supportive housing. Our shelter capacity has more than tripled compared to 2020 levels, providing beds for men, women, children, seniors, and family rooms. The County has expanded its network of service-provider partnerships, with more than 90% of regional programs reporting into HMIS, giving the community better data to understand needs and measure outcomes. The region has street outreach, emergency shelter, transitional housing, and permanent support housing. Rental assistance plus tenancy support (case management) has improved long-term housing stability. The biggest issue now is the gap between the number of people entering homelessness and the availability of affordable permanent housing, particularly for individuals and families in the 30–60% Area Median Income (AMI) range. Addressing this gap in Reno, Sparks, and Washoe County is essential to preventing people from falling into homelessness in the first place and ensuring that the progress we have made is sustainable.", "Marie Rodriguez": "In my current employment, I am part of a patrol team with the Reno Police Department. I am aware of the calls for service that we receive involving the homeless population. And I have taken calls for service for missing persons, which are routinely among the homeless. The statistics I've read indicate that the spike in Washoe County happened around the onset of the pandemic in 2020 and 2021, due to housing cost and job disruption. My job has taken me to the CARES Campus and I've toured it. Washoe county, Reno, Sparks, the libraries, social security, RTC, TMCC, UNR, the VA, and a number of non-profit organizations offer resources and assistance to our unhoused population. I personally have not witnessed mismanagement. What I have seen are unhoused people refusing services or not ready to accept services. I've seen people with mental illnesses that do not believe they need help. Help cannot be forced on people who do not want it. We need to do better in mental health care. We need to do better in guiding young people who age out of foster care."}}, {"id": 8, "question": "With growth continuing and drought years recurring, how should the county work with TMWA on long-term water planning?", "answers": {"Rob Pierce": "I believe Washoe County and TMWA need to work together much earlier in the development process. Before approving major developments, particularly in unincorporated areas, we need to know where the water will come from, whether that supply is sustainable during prolonged drought, and what infrastructure will be required. I strongly believe growth should pay for growth. If development requires bringing water, sewer, or other infrastructure into areas that have never had those services, those costs should be the responsibility of the development, not existing residents and ratepayers. We should continue investing in conservation, groundwater recharge, water reuse, watershed protection, and protecting our aquifers from overuse. Most importantly, land-use and water planning must work together. We cannot plan only for the good water years. We must plan for the drought years, because we know they will come.", "Brian Wadsworth": "The county already has two representatives on the TMWA Board, so representation is not the problem. I feel the problem lies with information getting to the full Commission. It is also important to remember that the county needs to also work with all the users of the Truckee River, including the Pyramid Lake Paiute Tribe. I had the honor to serve on the Pyramid Lake Paiute Tribal Council during the negotiations of the historic Truckee River Operating Agreement (TROA), and sat on the Council post-TROA. We live in a desert, and are always in a state of drought-this should always be in the back of our minds when it comes to long-term water planning. If we have a few good water years, it is usually followed by several bad water years.", "Mariluz Garcia": "The Truckee Meadows Water Authority (TMWA) has a diverse water supply, with a mix of surface and groundwater resources. In addition, the Truckee River Operating Agreement (TROA), implemented in 2015, provides additional upstream storage that strengthens drought resilience. Local jurisdictions work closely with TMWA on a regular basis to ensure that we have sufficient water through sound population and water-demand forecasts. I sit on the Western Regional Water Commission (WRWC) board and we recently approved the consensus forecast, which projects 71,307 new people in Washoe County between 2026 and 2046, bringing the total population to 595,292. Based on these projections, our region will have a projected surplus of 81,388 acre-feet. Every new housing, commercial, or agricultural development proposal in Reno, Sparks, and Washoe County must first secure water rights. Washoe County is an active partner in our region's water recycling efforts, where the new Advanced Purified Water Facility will be completed in 2029 and will purify 2 million gallons of Category A+ purified water per day. The County needs to continue promoting TMWA's water conservation efforts as well.", "Marie Rodriguez": "Water managers do already have some systems in place such as pulling from upstream storage like Lake Tahoe and Boca Reservoir. This means that even during dry spells, municipal reserves remain protected without forcing emergency water cuts. The county should coordinate land-use approvals with the TMWA resource plan. Also, growth should pay for growth with developers. I'd also support advanced reuse measures."}}, {"id": 9, "question": "What's your view on the county's current approach to mental health and crisis response, and where would you take it further?", "answers": {"Rob Pierce": "I believe Washoe County is moving in the right direction on mental health and crisis response, but we need to take it further. Not every mental health crisis should result in someone going to jail or sitting in an emergency room. We need stronger coordination between 911, 988, law enforcement, fire, REMSA, hospitals, mental health providers, and homeless services. I strongly support getting our regional unified dispatch system fully operational and working correctly. There are still bugs and challenges that need to be worked out, but the goal should be one coordinated system that gets the right resource to the right person as quickly as possible. I also support mobile crisis response so trained mental health professionals can respond alongside law enforcement when appropriate, allowing deputies to focus on public safety. Most importantly, we need somewhere to take people after the immediate crisis. Stabilizing someone for a few hours and putting them back into the same situation does not solve the problem. We need treatment, follow-up care, substance abuse services, and accountability. My goal is simple: the right response, at the right time, followed by the right treatment and support.", "Brian Wadsworth": "The county is offering a lot of services for mental health and crisis response, but I would like to see how efficient and effective these services are. I did a ride along with REMSA, and it was noted that they sometimes have a hard time to get law enforcement to come out for mental health calls. Understandably, the safety of our first responders is a priority. The audit would help our elected officials and management and personnel see how well or where improvements are needed.", "Mariluz Garcia": "The recently published 2026 Community Health Needs Assessment by Renown Health and Northern Nevada Public Health found that mental health was the highest-priority community health need in Washoe County. Our region has an insufficient number of mental health providers, increasing substance-use disorders, and limited crisis intervention capacity. The County has been working toward 988, mobile crisis teams, and crisis stabilization, while also pursuing a Sequential Intercept Model to reduce emergency-room visits and involvement in the criminal justice system. Renown's Crisis Care Center and the upcoming Washoe County's Children's Behavioral Health Center will provide necessary crisis stabilization services for adults and youth. I would like to see the region continue to address access to mental health where we still see long waitlists, insurance denials, and difficulty navigating the system. Another major gap that I would like to prioritize is substance use treatment and detox services, where we currently have a critical shortage.", "Marie Rodriguez": "I've touched on this in a couple of my previous responses. We must do better. In 2023, suicide was the number one preventable cause of death of young people under the age of 18. In 2025, Nevada ranked last in the country in youth mental health and 49th in adult mental health. This topic hits me close to home. I've lost colleagues. I know people who live with PTSD and other mental health challenges. Unfortunately, the problem lies in getting mental health professionals to practice (and stay) in Nevada, in general. Insurance and Medicaid payout rates are low here. We are not a medical friendly state. I'd support legislative measures to bring needed changes."}}, {"id": 10, "question": "Given the Washoe County Regional Detention Facility's recent scrutiny over staffing, medical care, and in-custody deaths, would you push for more county funding, oversight, or reporting requirements tied to jail conditions — and what would that look like?", "answers": {"Rob Pierce": "Public safety is one of the County's most important responsibilities. I support our Sheriff's Office and the men and women working in the detention facility, but I also believe the County Commission has a responsibility to provide proper funding and strong oversight. If staffing shortages are contributing to unsafe conditions, I would look at recruitment, retention, overtime, and staffing levels before simply adding positions. We need to understand the problem and make sure additional funding will actually solve it. Medical and mental health care also need close oversight. The County spends millions of taxpayer dollars on contracted inmate healthcare, and we should be regularly reviewing that contract, staffing levels, response times, complaints, and outcomes. Every in-custody death should be thoroughly investigated, and the Board should receive clear public reporting on deaths, serious incidents, staffing shortages, medical performance, and corrective actions while protecting legally confidential information. People in jail are in the County's custody, and we have a responsibility for their safety and basic medical care. I support additional funding when the need is demonstrated, but funding must come with measurable results, transparency, and accountability.", "Brian Wadsworth": "I am proponent for accountability and transparency. I would be in support of more accountability and transparency for our Washoe County Regional Detention Facility. As the auditor in me, a performance audit on these issues would help guide our elected officials and management to see where improvements may be needed.", "Mariluz Garcia": "Per NRS, the County Commissioners receive a quarterly report about the security of the jail and the treatment and condition of the inmates. At least twice a year, the board reviews the information concerning in-custody deaths, which are independently investigated by the Washoe County Regional Medical Examiner's Office. Commissioners also review and discuss facility-related issues, including repairs and maintenance of the jail. We are provided with regular updates about the education, employment, life skills, and mental health programs that are available to the inmates while they are in custody. I have conducted several tours of the Washoe County Detention Facility as part of my personal oversight. At this time, I do not see the need to add duplicative oversight or reporting requirements tied to jail conditions. Based on a recent study, the staffing levels at Parr Blvd. are considered low and this will be an area to focus on. In terms of the medical contract with Naphcare, the Sheriff's Office meets weekly with them, monitors Naphcare's staffing levels, documents and reports if there are any mistakes or improvements that need to be made, and makes sure that Naphcare is accountable for the medical services that they provide.", "Marie Rodriguez": "Our Regional Detention Facility is understaffed. My push would be for a solution that protects both staff and inmates. Some of the issues faced at Parr go back to mental health crisis and other health issues. We've already discussed that, and that shortage carries over to in-custody patients. To protect both employees and inmates, thorough reports and documentation are essential. What I want to see is enough staffing, including medical staffing and mental health staffing, so that both staff and in-custody individuals are safe."}}, {"id": 11, "question": "Will you commit to certifying election results regardless of outcome, and where do you stand on hand-counting paper ballots?", "answers": {"Rob Pierce": "Yes. As a County Commissioner, I will follow Nevada law and perform my duty to canvass and certify election results regardless of whether my candidate wins or loses. My responsibility is to the voters and the law, not to a particular outcome. At the same time, I believe voters deserve an election process they can trust. If there are legitimate questions or documented discrepancies, they should be investigated through the legal processes available before certification. Regarding paper ballots and hand counting, I believe we should remain open to reviewing any reasonable election procedure that improves accuracy, security, transparency, and public confidence. There is a great deal of discussion surrounding how ballots should be cast, counted, audited, and verified, and I believe decisions should be based on facts, Nevada law, cost, accuracy, security, and what best protects the integrity of our elections. I am not interested in making election administration a partisan issue. My goal is simple: every eligible voter gets one vote, every lawful vote is counted accurately, the process is transparent, and the results can be trusted and respected.", "Brian Wadsworth": "Yes.", "Mariluz Garcia": "Yes, I will certify the election results regardless of outcome. No, I am not in support of hand-counting paper ballots. I believe our elections in Washoe County are safe, secure, and accessible, consistent with the standards and mission of the Washoe County Registrar of Voters.", "Marie Rodriguez": "Yes, I will. I have confidence in the ballot counting machines used by Washoe County."}}, {"id": 12, "question": "How should the county prioritize its opioid settlement money?", "answers": {"Rob Pierce": "My first priority would be expanding access to treatment, including detox, mental health services, medication-assisted treatment, and long-term recovery programs. We need treatment available when someone is ready to accept help, not weeks or months later. I would also invest in prevention and education, particularly for our young people, and make sure law enforcement and first responders have the resources needed to respond to overdoses. Recovery cannot stop when someone completes treatment. We need follow-up services, job assistance, peer support, and programs that help people become productive and self-sufficient. We also need to help people change the environment, routines, and influences that contributed to their addiction. Sending someone back into the same situation without support can put their recovery at risk. I also want strict accountability for every dollar spent. Organizations receiving settlement money should have measurable goals and report their results. These settlement dollars will eventually end. We should use them to create lasting change and self-sufficiency, not permanent government dependency.", "Brian Wadsworth": "The county should prioritize the opioid settlement money for treatment and to help address the underlying issue with addiction. The next priority could be the aftercare after receiving treatment (both for the individual and family members).", "Mariluz Garcia": "Washoe County collaborated with the State of Nevada on this settlement and will receive approximately $41 million over 20 years. All funds are disbursed through the Washoe Opioid Abatement and Recovery Fund (WOARF) program where all revenue and expenditures are tracked. The first round of funding was allocated to the top five priority areas outlined in the 2022-2025 needs assessment. All awards were approved by the County Commissioners before disbursement. The 2026-2029 needs assessment identified five new priority recommendations for funding and two continued priorities from the last needs assessment. The WOARF dashboard on the website lists the projects that have been funded and describes how they are linked to the priorities. I support the current needs assessment, review, scoring, and prioritization process. If a nonprofit can no longer fulfill an award, the County Commission can de-obligate and re-award to a partner organization rather than terminating the program.", "Marie Rodriguez": "The county has established the Washoe Opioid Abatement and Recovery Fund plan that has outlined five new and two continued priority recommendations for the funding. In reviewing the plan, I believe the priorities support treatment, prevention, and recovery through various programs and resources, as is the purpose of the settlement."}}, {"id": 13, "question": "This year's Hawk, Bug, and Stallion fires burned over 150,000 acres and forced tens of thousands of evacuations. Do you think the county's current wildfire mitigation and evacuation planning for unincorporated areas is adequate, and what would you change?", "answers": {"Rob Pierce": "I believe the recent Hawk, Bug, and Stallion fires showed us that while Washoe County has made progress, we still have work to do. Taking three to four hours to evacuate portions of the North Valleys is unacceptable. In a fast-moving wildfire, people may not have that kind of time. It is also unacceptable to close a freeway during an evacuation and take over an hour to tell people where to go, or another hour to provide residents information on where to take their small and large animals. We have to do better. We need to identify choke points and determine where additional emergency access, roadway improvements, and secondary evacuation routes are needed. We also need better early warning systems, communication, vegetation management, and coordination between fire, law enforcement, emergency management, and neighboring jurisdictions. Most importantly, evacuation capacity must be part of our land-use decisions. Before approving thousands of additional homes in a fire-prone area, we need to know how we will safely evacuate both new and existing residents. We cannot prevent every wildfire, but we can—and must—be better prepared for the next one.", "Brian Wadsworth": "It was hard to watch some of our elected leaders and community members and news media talk about the lack of communication regarding evacuation notices. There was so much information out there, from multiple sources. It would have been nice to see one place to go for information. I got a lot of my information from Facebook and Instagram, because I didn't see a whole lot coming from the county or city governments. Oftentimes, the information was outdated. I also attended the Hawk Fire community meeting, and we did not hear from our elected county officials. It was great to get the update from the hardworking firefighters and first responders though.", "Mariluz Garcia": "I personally live in an area that is close to open space, has limited evacuation routes, and a need for additional wildfire preparedness resources. While the county is already doing a lot, I believe we need to continue strengthening our evacuation protocol and communication with the public. For wildfire mitigation, I support expanding Truckee Meadows Fire Protection District's (TMFPD) wildland fire division, which has roughly 40 personnel. They are wildland firefighters by trade, but when they are not fighting wildland fires, they are working on fuels mitigation and green waste projects throughout Washoe County. This is externally funded through grants, partnerships, and contracts with utility companies, HOAs, and others. A goal would be to secure state, federal, or philanthropic funding to expand these efforts. For evacuation planning, the county has maintained and updated its Washoe County Evacuation, Sheltering, and Mass Care Plan since 2008. Washoe County also accepted a $185,000 private donation to fund a countywide Swift Exit Evacuation Study, which includes wildfire behavior modeling, traffic flow analysis, GIS mapping and scenario planning, and community input. I personally participated in this study and look forward to reviewing and implementing its recommendations, expected this month.", "Marie Rodriguez": "Living in dry, high, and unincorporated desert will always have the risk of wildfire. When considering the safety of county residents, this should always be part of the conversation. I had concerns with wildfire mitigation and evacuation planning, after witnessing the Davis Fire, which burned nearly 5,900 acres. The devasting Hawk, Bug, and Stallion fires, shed light what can happen during multi-incident wildfires in climate-stressed situations. I work in public service and I know our first responders did a great job. However, we need more and better resources/equipment, communication, public awareness, evacuation locations, and evacuation routes. Local government also needs to take a look at NDF."}}, {"id": 14, "question": "As Reno-area growth pushes development farther into fire-prone wildland-urban interface areas — including in unincorporated Washoe County — would you support restricting development in high fire-risk zones, and if so, how?", "answers": {"Rob Pierce": "I believe we have to be very careful about continuing to push development farther into high and extreme fire-risk areas. I support private property rights and responsible growth, but we also have a responsibility to protect residents, firefighters, and taxpayers. I would not support a blanket prohibition on development simply because property falls within a wildland-urban interface. Instead, I believe the level of development should be based on the actual fire risk and whether that risk can reasonably be mitigated. In high-risk areas, I would require adequate evacuation routes, emergency vehicle access, reliable water supply and fire flow, defensible space, fire-resistant construction, and adequate fire protection before approving significant new development. I am especially concerned about developments with only one practical way in and out. During a wildfire, residents trying to evacuate while firefighters are trying to enter can create a dangerous situation. If an area cannot provide adequate evacuation, water, access, and emergency response, then we need to be willing to reduce density, require additional mitigation, or in extreme cases say that development simply does not belong there. Growth should never come at the expense of public safety. Taking 3-4 hours to evacuate the North Valleys like with these last fires is unacceptable.", "Brian Wadsworth": "The passing of Assembly Bill 376 allows insurers to sell homeowner policies without wildfire coverage. This is one thing to consider when building in a high fire-risk zones. I would not restrict development in high fire-risk zones, because the county allows developments in flood plains. Two different situations, but both could have devasting effects on a community. I was a participant in the 2025-2026 Washoe County Leadership Academy. In the Academy we learned anything and everything about Washoe County, this included completing a class project. Our class project revolved around a demonstration on home hardening in the Sun Valley community. The county could look at doing more prevention and mitigation projects throughout the region.", "Mariluz Garcia": "Many areas of Washoe County face significant wildfire risk and residents can use the Washoe Regional Mapping System (WRMS) fire hazard map to look up the Wildland-Urban Interface (WUI) rating of their neighborhood or parcel (low, moderate, high, or extreme). Washoe County has adopted the International Wildland Urban Interface Code (IWUIC) since 2013 and is currently operating under the 2024 edition. Today, new development in high fire-risk zones is heavily conditioned by the IWUIC. These codes include mandatory construction standards and approved building materials, water supply, access roads, prohibited plant species, and defensible space requirements. I would support restricting development that does not meet building and fire-safety standards, as well as development in areas where adequate emergency services cannot be provided. A big problem that I see is that older homes that were built before the IWUIC was adopted are not being retrofitted to current WUI standards. I am interested in exploring incentives, grants, and education to help homeowners voluntarily harden these homes and reduce wildfire risk in \"high\" or \"extreme\" WUI areas that were constructed 40+ years ago.", "Marie Rodriguez": "As the fires in August showed us, we live in a high risk fire zone that includes residential neighborhoods already. It is unlikely that building in our area will stop. Our homes do need defensible space, and we need to consider the density of building in extreme hazard areas. Some homeowners are losing their home insurance due to living in high risk fire zones. We need to ask if homes being built can even be insured. Before further building, I want to see stricter building codes, better access and infrastructure, and investment in our firefighting infrastructure."}}, {"id": 15, "question": "What road, transit, or infrastructure project in the county most needs funding?", "answers": {"Rob Pierce": "My highest transportation priority would be the North Valleys. For years, residential growth has outpaced our road and infrastructure improvements, and residents are paying the price through congestion and, more importantly, limited evacuation options during emergencies. The improvements underway on U.S. 395 are important, but we cannot stop there. We need additional north-south and east-west connections, improvements to Lemmon Drive, Red Rock Road, North Virginia Street, Moya Boulevard, and other major corridors. The recent wildfires demonstrated that transportation is not just about getting to work faster—it is also about public safety. When it can take three or four hours to evacuate portions of the North Valleys, we have a serious infrastructure problem. I would work closely with RTC, NDOT, developers, and our federal delegation to aggressively pursue funding and move these projects forward. I also believe growth should pay for growth. When new development creates additional demand on our roads, developers should contribute their fair share toward the infrastructure needed to support it. We need to build infrastructure before, or alongside, growth—not years after residents are already dealing with the consequences.", "Brian Wadsworth": "I was born and raised here in Nevada, and I have seen how much Washoe County has grown. We need to evaluate the cumulative effects of any new growth and developments in the county, and ensure we have the sustainable resources-this includes our roads. As we drive through Washoe County, we are spending more time sitting in traffic. Washoe County needs to address the lack of roads to accommodate the increase in population here.", "Mariluz Garcia": "In the community that I represent, the most pressing infrastructure priority is Sun Valley Boulevard and I have been advocating for this project since taking office. As the Sun Valley community prepares to celebrate its 80th birthday next year, this corridor is long overdue for safer, more modern transportation infrastructure. This dangerous highway corridor (State Route 443) serves over 20,000 residents, but has never had continuous sidewalks, paved bike paths, street lights, updated bus stops, or a modernized drainage system. The newly secured federal grant was a major breakthrough for a project that local, state, and federal officials and I have worked to advance for years. Together, local, state, and federal funding will support an investment of over $80 million in infrastructure improvements making Sun Valley Boulevard safer for pedestrians, cyclists, transit riders, and drivers, as well as more resilient to flooding. Construction is expected to begin in late 2027.", "Marie Rodriguez": "This is a complex question because the answer depends on the project's primary goal. Are we trying to improve traffic flow, pedestrian safety, bicycle access, aging bridges, or emergency evacuation routes? While all of these priorities matter, I would prioritize critical fire evacuation infrastructure in the North Valleys, Cold Springs, Spanish Springs, Sun Valley, and Washoe Valley."}}, {"id": 16, "question": "Why are you running for this seat, what separates you from the other candidates in this race, and what's the one thing voters should know about you before they vote?", "answers": {"Rob Pierce": "I am running because I love Washoe County and believe public service is about listening, showing up, and solving problems. I have lived here for nearly four decades, raised my family here, and spent many years serving this community. What I bring to this race is hands-on experience with county government. I have served on the Planning Commission, Board of Adjustment, Regional Planning Commission, Board of Equalization, District 5 Citizen Advisory Board, and other boards and committees. I understand how County decisions affect our neighborhoods, roads and infrastructure, public safety, property rights, responsible growth, and our quality of life. I am not running because I need another title or another job. I am retired. I am running because I believe my experience and years of public and community service have prepared me to give back and work for the people of Washoe County. I want to help make this an even better place to live, work, raise a family, retire, and enjoy life. The one thing I want voters to know about me is that I will listen. We may not always agree, but I will hear you out, treat you with respect, ask questions, and work to find common ground whenever possible. Every decision I make will be based on what I believe is in the best interest of the residents of District 5 and Washoe County as a whole. For me, this is about service, not politics.", "Brian Wadsworth": "My journey to run for Washoe County Commissioner for District 5 began in January 2025 when our neighbors up in Gerlach were going to potentially be without life-saving emergency services. This was due to a non-renewal of a contract between the Pyramid Lake Paiute Tribe and Washoe County to provide these services for Gerlach. Up until the contract was set to expire on June 30, 2025, Washoe County was still piecemealing together a plan for Gerlach. It is unacceptable for any our communities, no matter how big or small, to be forgotten about or to be an afterthought. If elected, I want to ensure all of our communities feel safe and have a voice. District 5 is very dynamic with a mixture of urban, suburban, rural, and Tribal communities. District 5 is also the largest land wise-covering over 80% of land in Washoe County. My experience goes beyond sitting on a Board or Commission. District 5 needs a County Commissioner that understands the diverse communities in Washoe County, can navigate the complex financials of the County's billion-dollar budget, and most importantly, will listen to all of our communities in Washoe County.", "Mariluz Garcia": "I was born and raised in Elko, Nevada and I am the daughter of Basque and Mexican immigrants. Nearly 30 years ago I moved to Washoe County to attend college—ultimately choosing to make this community my home. I earned a bachelor's, master's, and Ph.D. in Education from the University of Nevada, Reno. Throughout my career, I have worked closely with families in my community as an educator, nonprofit leader, and now as a Washoe County Commissioner. As a mother who adopted my daughter and son from Washoe County, I also understand firsthand how families seek essential services and navigate complex systems. I am running for re-election so I can continue the work that I began. During my first term, I fought for increased access to mental health care, supported public safety and fire protection, advocated for parks and open spaces, initiated a variety of community revitalization projects, and worked to address the housing crisis. I was the first Latina elected to the Washoe County Commission, and serving this community has been the honor of my life.", "Marie Rodriguez": "Because I stand for a safer and smarter Washoe County. I've been working with the Reno Police Department on patrol, as a Community Services Officer for eight years. This job has given me a real sense of what is happening in our neighborhoods and what our community needs and wants. For the past four years, I've also been an active volunteer serving on the Ward 3 Neighborhood Advisory Board, the Reno Arts and Culture Commission, and the Washoe County Library Board of Trustees. My long involvement in community has given me a good understanding of how our cities (Reno and Sparks) work, as well as the county. When I feel strongly on a matter, I am not afraid to speak up. In addition to giving public comment at city council and county commissioner meetings, I have gone to Carson City and spoken at the state legislature. I care about the future of people of Washoe County. Running for this seat is simply the next step on a path that I have already been on. Voters should know that while I value education and am a life-long learner, I come from a blue color background, and I am not afraid of hard work. I believe all elected officials are public servants that should work cooperatively in service to their communities."}}]};
+
+const listEl = document.getElementById('question-list');
+const searchEl = document.getElementById('search');
+const countEl = document.getElementById('result-count');
+const noResultsEl = document.getElementById('no-results');
+
+function partyClass(p) {
+  return p === 'D' ? 'dem' : 'rep';
+}
+
+function partyLabel(p) {
+  return p === 'D' ? 'Democrat' : 'Republican';
+}
+
+function renderQuestion(q) {
+  const item = document.createElement('div');
+  item.className = 'q-item';
+  item.dataset.qid = q.id;
+
+  const toggle = document.createElement('button');
+  toggle.className = 'q-toggle';
+  toggle.setAttribute('aria-expanded', 'false');
+  toggle.innerHTML = `
+    <svg class="caret" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M5 3l6 5-6 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span class="q-text"></span>
+  `;
+  toggle.querySelector('.q-text').textContent = q.question;
+
+  const panel = document.createElement('div');
+  panel.className = 'q-panel';
+
+  const grid = document.createElement('div');
+  grid.className = 'answer-grid';
+
+  DATA.candidates.forEach(c => {
+    const card = document.createElement('div');
+    card.className = 'answer-card ' + partyClass(c.party);
+    card.innerHTML = `
+      <div class="who">
+        <span class="name"></span>
+        <span class="tag ${partyClass(c.party)}"></span>
+      </div>
+      <div class="district"></div>
+      <div class="answer-text"></div>
+    `;
+    card.querySelector('.name').textContent = c.name;
+    card.querySelector('.tag').textContent = partyLabel(c.party);
+    card.querySelector('.district').textContent = c.district;
+    card.querySelector('.answer-text').textContent = q.answers[c.key] || '(No response.)';
+    grid.appendChild(card);
+  });
+
+  panel.appendChild(grid);
+
+  toggle.addEventListener('click', () => {
+    const isOpen = item.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  item.appendChild(toggle);
+  item.appendChild(panel);
+  return item;
+}
+
+function renderAll(questions) {
+  listEl.innerHTML = '';
+  questions.forEach(q => listEl.appendChild(renderQuestion(q)));
+}
+
+function matches(q, term) {
+  if (!term) return true;
+  const haystack = [q.question, ...Object.values(q.answers)].join(' ').toLowerCase();
+  return haystack.includes(term);
+}
+
+function updateCount(n, total) {
+  if (!searchEl.value.trim()) {
+    countEl.textContent = total + ' questions';
+  } else {
+    countEl.textContent = n + ' of ' + total + ' questions match';
+  }
+}
+
+function applySearch() {
+  const term = searchEl.value.trim().toLowerCase();
+  const filtered = DATA.questions.filter(q => matches(q, term));
+  renderAll(filtered);
+  updateCount(filtered.length, DATA.questions.length);
+  noResultsEl.style.display = filtered.length === 0 ? 'block' : 'none';
+}
+
+searchEl.addEventListener('input', applySearch);
+
+applySearch();
+
+// --- Auto-resize: tell the parent page how tall we are, whenever it changes ---
+function reportHeight() {
+  const height = document.documentElement.scrollHeight;
+  window.parent.postMessage({ type: 'washoe-qa-resize', height: height }, '*');
+}
+
+// Report on load, and whenever content changes (accordion open/close, search filtering)
+window.addEventListener('load', reportHeight);
+listEl.addEventListener('click', () => setTimeout(reportHeight, 50));
+searchEl.addEventListener('input', () => setTimeout(reportHeight, 50));
+
+// Some parent pages attach their message listener a beat after the iframe
+// fires its first "load" event, so that very first message can get missed.
+// Re-send a few extra times early on to make sure it lands.
+reportHeight();
+[100, 300, 600, 1000, 2000].forEach(delay => setTimeout(reportHeight, delay));
+
+// Also catch resizes from font loading, window resizing, etc.
+new ResizeObserver(reportHeight).observe(document.body);
+</script>
+</body>
+</html>
